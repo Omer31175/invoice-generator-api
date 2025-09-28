@@ -1,66 +1,126 @@
-# Invoice Generator API
+# 🧾 Invoice Generator API
 
-A FastAPI-based microservice that generates professional PDF invoices using **ReportLab**.
+A FastAPI‑based backend service that generates professional PDF invoices on demand.  
+Built with Python, FastAPI, and ReportLab, this project demonstrates clean API design, PDF generation, and recruiter‑ready documentation.
 
-## 🚀 Features
-- Generate PDF invoices with custom metadata
-- RESTful API built with FastAPI
-- Interactive API docs at `/docs`
-- Organized output folder for generated invoices
+---
 
-## 📦 Installation
-Clone the repository and install dependencies:
+## ✨ Features
+- Generate PDF invoices with customer details and line items
+- Retrieve invoices by filename
+- Automatic timestamped filenames (no overwrites)
+- Interactive API documentation with Swagger UI
+- Recruiter‑ready README with screenshots and sample output
 
-```bash
-git clone https://github.com/your-username/invoice-generator-api.git
+---
+
+## 🛠 Tech Stack
+- **Backend**: Python, FastAPI
+- **PDF Generation**: ReportLab
+- **Database**: (optional, file‑based storage for now)
+- **Docs**: Swagger UI (auto‑generated)
+
+---
+
+## 🌐 API Root & Documentation
+- **API root**: [http://127.0.0.1:8000](http://127.0.0.1:8000)  
+- **Swagger docs**: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+
+---
+
+## 📖 API Endpoints
+
+### Swagger Overview
+The API is fully documented with Swagger UI.
+
+![Swagger Overview](screenshots/swagger-overview.png)
+
+---
+
+### POST /invoices
+Create a new invoice by sending customer details and line items.
+
+**Request Body**
+```json
+{
+  "client_name": "John Doe",
+  "client_email": "john@example.com",
+  "items": [
+    { "item": "Web Development Services", "qty": 10, "price": 50 },
+    { "item": "Hosting (1 year)", "qty": 1, "price": 120 }
+  ],
+  "currency": "USD"
+}
+Responses
+
+200 OK → Returns the generated invoice filename and URL
+
+422 Validation Error → Missing or invalid fields
+
+  
+
+GET /invoices/{filename}
+Retrieve a previously generated invoice by filename.
+
+Request
+
+Http
+
+
+Copy
+GET /invoices/invoice_20250928_191340.pdf
+
+Response
+
+Json
+
+
+Copy
+{
+  "filename": "invoice_20250928_191340.pdf",
+  "url": "http://127.0.0.1:8000/invoices/invoice_20250928_191340.pdf"
+}
+
+Sample Invoice
+Here’s an example of the generated PDF invoice:
+
+
+🚀 Setup & Run
+Clone the repository:
+
+Bash
+
+
+Copy
+git clone https://github.com/yourusername/invoice-generator-api.git
 cd invoice-generator-api
+Create a virtual environment & install dependencies:
+
+Bash
+
+
+Copy
+python -m venv venv
+source venv/bin/activate   # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
-▶️ Run the app
-Start the server with Uvicorn:
+Run the server:
 
 Bash
 
 
 Copy
 uvicorn main:app --reload
-The app will be available at:
+Open Swagger docs at:
 
-API root: http://127.0.0.1:8000
-
-Swagger docs: http://127.0.0.1:8000/docs
-
-📂 Project Structure
 Code
 
 
 Copy
-Invoice_Generator/
-├── main.py            # FastAPI app
-├── output/            # Generated invoices
-├── data/              # Input/sample data
-├── requirements.txt   # Dependencies
-├── README.md          # Project documentation
-└── .gitignore         # Ignore venv, cache, PDFs
-📝 Example Request
-Http
+http://127.0.0.1:8000/docs
+📌 Notes
+Invoices are saved with timestamped filenames (e.g., invoice_20250928_191340.pdf)
 
+Screenshots in this README are based on the same sample request/response flow
 
-Copy
-POST /generate_invoice
-Content-Type: application/json
+Extendable with authentication, Stripe billing, or database storage
 
-{
-  "invoice_id": "INV-001",
-  "client": "John Doe",
-  "amount": 250.00
-}
-✅ Step 4: Save and commit
-Once you’ve added the content, save the file and commit it:
-
-Powershell
-
-
-Copy
-git add README.md
-git commit -m "Add README.md with project details"
-git push origin main
