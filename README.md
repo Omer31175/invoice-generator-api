@@ -51,76 +51,73 @@ Create a new invoice by sending customer details and line items.
   ],
   "currency": "USD"
 }
+```
 Responses
 
 200 OK → Returns the generated invoice filename and URL
 
 422 Validation Error → Missing or invalid fields
 
-  
+![POST /invoices](screenshots/post-invoices.png)  
+![POST /invoices Request](screenshots/post-invoices-request.png)  
+![POST /invoices Response](screenshots/post-invoices-response.png)
 
-GET /invoices/{filename}
+---
+
+---
+
+### GET /invoices/{filename}
 Retrieve a previously generated invoice by filename.
 
-Request
-
-Http
-
-
-Copy
+**Request**
+```http
 GET /invoices/invoice_20250928_191340.pdf
 
 Response
 
-Json
-
-
-Copy
 {
   "filename": "invoice_20250928_191340.pdf",
   "url": "http://127.0.0.1:8000/invoices/invoice_20250928_191340.pdf"
 }
+```
+![GET /invoices Request](screenshots/get-invoices-request.png)  
+![GET /invoices Response](screenshots/get-invoices-response.png)
 
-Sample Invoice
+---
+
+### Sample Invoice
 Here’s an example of the generated PDF invoice:
 
-
-🚀 Setup & Run
-Clone the repository:
-
-Bash
+![Sample Invoice](screenshots/sample-invoice.png)
 
 
-Copy
+
+
+---
+
+## 🚀 Setup & Run
+
+1. Clone the repository
+```bash
 git clone https://github.com/yourusername/invoice-generator-api.git
 cd invoice-generator-api
-Create a virtual environment & install dependencies:
 
-Bash
-
-
-Copy
+2.Create a virtual environment & install dependencies
 python -m venv venv
 source venv/bin/activate   # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
-Run the server:
 
-Bash
-
-
-Copy
+3.Run the server
 uvicorn main:app --reload
-Open Swagger docs at:
 
-Code
-
-
-Copy
+4.Open Swagger docs at
 http://127.0.0.1:8000/docs
-📌 Notes
-Invoices are saved with timestamped filenames (e.g., invoice_20250928_191340.pdf)
 
-Screenshots in this README are based on the same sample request/response flow
+---
 
-Extendable with authentication, Stripe billing, or database storage
+## 📌 Notes
+- Invoices are saved with timestamped filenames (e.g., `invoice_20250928_191340.pdf`)  
+- Screenshots in this README are based on the same sample request/response flow  
+- Extendable with authentication, Stripe billing, or database storage
+
 
