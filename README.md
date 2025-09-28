@@ -40,6 +40,7 @@ The API is fully documented with Swagger UI.
 ### POST /invoices
 Create a new invoice by sending customer details and line items.
 
+
 **Request Body**
 ```json
 {
@@ -51,12 +52,12 @@ Create a new invoice by sending customer details and line items.
   ],
   "currency": "USD"
 }
+
 ```
-Responses
+**Responses**
+- `200 OK` → Returns the generated invoice filename and URL  
+- `422 Validation Error` → Missing or invalid fields
 
-200 OK → Returns the generated invoice filename and URL
-
-422 Validation Error → Missing or invalid fields
 
 ![POST /invoices](screenshots/post-invoices.png)  
 ![POST /invoices Request](screenshots/post-invoices-request.png)  
@@ -72,14 +73,15 @@ Retrieve a previously generated invoice by filename.
 **Request**
 ```http
 GET /invoices/invoice_20250928_191340.pdf
-
-Response
-
+```
+**Response**
+```json
 {
   "filename": "invoice_20250928_191340.pdf",
   "url": "http://127.0.0.1:8000/invoices/invoice_20250928_191340.pdf"
 }
 ```
+
 ![GET /invoices Request](screenshots/get-invoices-request.png)  
 ![GET /invoices Response](screenshots/get-invoices-response.png)
 
@@ -89,8 +91,6 @@ Response
 Here’s an example of the generated PDF invoice:
 
 ![Sample Invoice](screenshots/sample-invoice.png)
-
-
 
 
 ---
